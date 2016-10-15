@@ -22,11 +22,10 @@
     
     #Get the data concerning only mean and standard deviation
     Required<-grep(".*mean.*|.*std.*",features[,2])
-   Required_names<-features[Required,2]
- Required_naames=gsub('-mean','Mean',required_names)
- Required_names=gsub('-mean','Mean',required_names)
- Required_names=gsub('-std','Std',required_names)
- Required_names=gsub('[-()]','',required_names)
+   Required_data<-features[Required,2]
+ Required_data=gsub('-mean','Mean',required_data)
+ Required_data=gsub('-std','Std',required_data)
+ Required_data=gsub('[-()]','',required_data)
  
  # Load the Data set on training data
 train_Activities<-read.table("C:/UCI HAR Dataset/train/Y_train.txt")
