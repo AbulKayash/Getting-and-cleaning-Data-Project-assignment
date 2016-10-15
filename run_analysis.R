@@ -13,8 +13,8 @@
    activity[,2]<-as.character(activity[,2])
    
    #Get the features from the dataset
-   features<-read.table("C:/UCI HAR Dataset/features.txt"
-    features[,2]<-as.character(features[,2])
+   feature_data<-read.table("C:/UCI HAR Dataset/features.txt"
+    feature_data[,2]<-as.character(feature_data[,2])
     #view first few rows of resulting data
     
     head(activity)
@@ -22,12 +22,13 @@
     
     #Get the data concerning only mean and standard deviation
     Required<-grep(".*mean.*|.*std.*",features[,2])
-   Required_data<-features[Required,2]
+   Required_data<-feature_data[Required,2]
  Required_data=gsub('-mean','Mean',required_data)
  Required_data=gsub('-std','Std',required_data)
  Required_data=gsub('[-()]','',required_data)
  
  # Load the Data set on training data
+train_data <- read.table("UCI HAR Dataset/train/X_train.txt")[Required]                         
 train_Activities<-read.table("C:/UCI HAR Dataset/train/Y_train.txt")
 train_Subjects<-read.table("C:/UCI HAR Dataset/train/subject_train.txt")
  train<-cbind(train_Subjects,train_Activities,train_data)
@@ -39,7 +40,7 @@ train_Subjects<-read.table("C:/UCI HAR Dataset/train/subject_train.txt")
  
  #Merge the datasets
  New_dataset<-rbind(train,test)
- colnames(New_dataset)<-c("subject","activity",Required_names)
+ colnames(New_dataset)<-c("subject","activity",Required_data)
  
  # Produce factors for activities and Subjects
   New_dataset$activity<-factor(New_dataset$activity,levels = activity[,1],labels=activity[,2])
